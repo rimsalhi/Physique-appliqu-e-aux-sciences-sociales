@@ -10,7 +10,7 @@ G=nx.Graph()  #Graphe vide
 G.add_nodes_from(range(1,N+1)) #Ajout des sommets (agents)
 
 for i in range(1,N+1):
-    G.nodes[i]['currency']='i'.  #Au départ, chaque individu i à une devise 'i'
+    G.nodes[i]['currency']='i'.  #Au départ, chaque individu i utilise une devise 'i'
 
 
 #On ajoute des arêtes avec une probabilité p 
