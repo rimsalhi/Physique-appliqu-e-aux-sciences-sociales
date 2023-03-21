@@ -6,8 +6,12 @@ N=100
 p=0.05
 
 G=nx.Graph()
+Currencies=[i for i in range(1,N+1)]
 
-G.add_nodes_from(range(N))
+G.add_nodes_from(range(1,N+1))
+
+for i in range(1,N+1):
+    G.nodes[i]['currency']='i'
 
 for i in range(N):
     for j in range(i+1,N):
