@@ -1,5 +1,6 @@
 
 #On commence par déterminer quelle devise est la plus utilisée par les voisins de i, ensuite on modifie la devise de i.
+#Si plusieurs devises sont utilisées par le même nombre maximal de voisins, on choisit aléatoirement l'une de ces devises.
 
 def change_currency(i,G):
     neighbors=list(G.neighbors(i))
@@ -9,6 +10,7 @@ def change_currency(i,G):
             d[G.nodes[j]['currency']]=1
         else:
             d[G.nodes[j]['currency']]+=1
-    max=max(d.items()[0], key=lambda x: x[1])
-    G.nodes[i]['currency']=max
+    max=max(d.values())
+    L=[j for j,v in d.items() if v==max]
+    G.nodes[i]['currency']=random.choice(L)
 
