@@ -5,8 +5,7 @@ import networkx as nx
 N=100
 p=0.05
 
-G=nx.Graph()
-Currencies=[i for i in range(1,N+1)]
+G=nx.Graph()  #Graphe vide
 
 G.add_nodes_from(range(1,N+1))
 
