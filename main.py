@@ -216,3 +216,17 @@ amenés à avoir une seule devise commune. De façon analogue, lorsque
 p tend vers 0, la moyenne tend vers 100'''
 
 
+#On trace les résultats pour plusieurs valeurs de p 
+
+P=np.linspace(0,1,100)
+M=[]
+for p in P:
+    M.append(mean_currencies(p))
+
+plt.plot(P,M)
+plt.show() #Complexité élevée, prend trop de tps à être executé
+'''Plus p tend vers 0, plus la moyenne tend vers 100.
+Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''
+
+
+
