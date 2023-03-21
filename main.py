@@ -2,7 +2,7 @@ import random
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
-
+from collections import Counter, defaultdict
 
 
 N=100 #Nombre d'agents
@@ -64,21 +64,17 @@ def change_currency(i,G):
 
 
     neighbors=list(G.neighbors(i))
-    if neighbors==[]:
-        pass
-    else:
-        d={}
-        for j in neighbors:
-            if G.nodes[j]['currency'] not in d:
-                d[G.nodes[j]['currency']]=1
+    if neighbors:
+        d=Counter([G.nodes[j]['currency'] for j in neighbors])
+        currency_max=max(d,key=d.get)
+        if G.nodes[i]['currency']!=currency_max:
+            count_max=max(d.values())
+            currencies_max=[j for j,s in d.items() if v==count_max]
+            if G.nodes[i]['currency'] in currencies_max:
+                currency=G.nodes[i]['currency']
             else:
-                d[G.nodes[j]['currency']]+=1
-        max1=max(d.values())
-        L=[j for j,v in d.items() if v==max1]
-        if G.nodes[i]['currency'] in d and d[G.nodes[i]['currency']]==max1:
-            pass
-        else:
-            G.nodes[i]['currency']=random.choice(L)
+                currency=random.choice(currencies_max)
+            G.nodes[i]['currency']=currency
 
 
 
