@@ -5,9 +5,12 @@ import networkx as nx
 N=100
 p=0.05
 
-G=nx.Graph()  #Graphe vide
+#Graphe vide
+G=nx.Graph() 
 
-G.add_nodes_from(range(1,N+1)) #Ajout des sommets (agents)
+
+#Ajout des sommets (agents)
+G.add_nodes_from(range(1,N+1)) 
 
 
 #Au départ, chaque individu i utilise une devise 'i'
