@@ -16,7 +16,7 @@ for i in range(1,N+1):
 #On ajoute des arêtes avec une probabilité p 
 for i in range(N):
     for j in range(i+1,N):
-        if random.random()<=p:
+        if random.random()<p:
             G.add_edge(i, j). 
 
 
