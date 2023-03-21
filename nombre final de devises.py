@@ -10,7 +10,7 @@ def social_utility(G):
     for i in G.nodes():
         for j in G.neighbors(i):
             if G.nodes[i]['currency']!=G.nodes[j]['currency']:
-                u+=-0.5
+                u-=0.5
     return u
 
 
@@ -19,15 +19,38 @@ def social_utility(G):
 def currencies_number(G):
     u=social_utility(G)
     precedent=None
-    while True:
+    while u!=precedent:
         precedent=u
         for i in G.nodes():
             change_currency(i,G)
         u=social_utility(G)
-        assert u!=precedent
     L=[]
     for i in G.nodes:
         if G.nodes[i]['currency'] not in L:
             L.append(G.nodes[i]['currency'])
     return len(L)
         
+
+
+s=0
+p=1
+N=100
+
+for i in range(10000):
+
+    G=nx.Graph() 
+
+    G.add_nodes_from(range(1,N+1)) 
+
+    for i in range(1,N+1):
+        G.nodes[i]['currency']='i'
+
+    for i in range(1,N+1):
+        for j in range(i+1,N+1):
+            if random.random()<p:
+                G.add_edge(i, j)
+           
+
+    s+=currencies_number(G)
+
+print(s/10000)

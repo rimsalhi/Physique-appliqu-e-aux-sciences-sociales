@@ -4,13 +4,18 @@
 
 def change_currency(i,G):
     neighbors=list(G.neighbors(i))
-    d={}
-    for j in neighbors:
-        if G.nodes[j]['currency'] not in d:
-            d[G.nodes[j]['currency']]=1
-        else:
-            d[G.nodes[j]['currency']]+=1
-    max=max(d.values())
-    L=[j for j,v in d.items() if v==max]
-    G.nodes[i]['currency']=random.choice(L)
+    if neighbors==[]:
+        pass
+    else:
+        d={}
+        for j in neighbors:
+            if G.nodes[j]['currency'] not in d:
+                d[G.nodes[j]['currency']]=1
+            else:
+                d[G.nodes[j]['currency']]+=1
+        max1=max(d.values())
+        L=[j for j,v in d.items() if v==max1]
+        G.nodes[i]['currency']=random.choice(L)
+
+
 
