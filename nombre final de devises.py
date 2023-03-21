@@ -4,7 +4,7 @@ import networkx as nx
 
 N=100
 
-
+#la fonction social_utility retourne l'utilité sociale du système 
 def social_utility(G):
     u=0
     for i in G.nodes():
@@ -14,8 +14,8 @@ def social_utility(G):
     return u
 
 
-#Étant donné une probabilité p, on calcule le nombre de devises distinctes dans le système final 
-
+#Étant donné une probabilité p, on calcule le nombre de devises distinctes dans le système final
+#Tant que l'utilité sociale change, il faut parcourir à nouveau tous les noeuds du graphe
 def currencies_number(G):
     u=social_utility(G)
     precedent=None
