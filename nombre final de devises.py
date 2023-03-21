@@ -7,10 +7,9 @@ N=100
 #la fonction social_utility retourne l'utilité sociale du système 
 def social_utility(G):
     u=0
-    for i in G.nodes():
-        for j in G.neighbors(i):
-            if G.nodes[i]['currency']!=G.nodes[j]['currency']:
-                u-=0.5
+    for node1,node2 in G.edges():
+        if G.nodes[node1]['currency']!=G.nodes[node2]['currency']:
+            u=u-1
     return u
 
 
@@ -33,7 +32,7 @@ def currencies_number(G):
 
 
 s=0
-p=1
+p=0.05
 N=100
 
 for i in range(10000):
@@ -43,7 +42,7 @@ for i in range(10000):
     G.add_nodes_from(range(1,N+1)) 
 
     for i in range(1,N+1):
-        G.nodes[i]['currency']='i'
+        G.nodes[i]['currency']=str(i)
 
     for i in range(1,N+1):
         for j in range(i+1,N+1):
@@ -53,4 +52,4 @@ for i in range(10000):
 
     s+=currencies_number(G)
 
-print(s/10000)
+print(s/10000) #Moyenne des devises à l'état final
