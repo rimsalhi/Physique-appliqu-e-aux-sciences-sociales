@@ -15,8 +15,8 @@ N=100
 '''On reprend les fonctions précédentes, et on modifie 
 seulement la manière de construire le graphe, de telle 
 sorte à ce qu'il y ait deux communautés ayant une 
-probabilité pinter de connection entre deux noeuds de la 
-même communauté, et une proba pintra de connection entre 
+probabilité pinter de connexion entre deux noeuds de la 
+même communauté, et une proba pintra de connexion entre 
 deux noeuds de communautés différentes (On considère 
 que les N/2 premiers noeuds appartiennent à une 
 communauté, et que le reste appartient à l'autre 
@@ -24,19 +24,19 @@ communauté)'''
 
 
 
-#Fonction changement de devise lorsque les connections de i utilisent majoritairement une autre devise 
+#Fonction changement de devise lorsque les connexions de i utilisent majoritairement une autre devise 
 
 
 def change_currency(i,G):
     '''Cette fonction modifie la devise de i en la devise la plus
-    utilisée par ses connections.
+    utilisée par ses connexions.
     Si plusieurs devises sont utilisées par le même nombre maximal 
     de voisins, on choisit aléatoirement l'une de ces devises 
     (en donnant la priorité à la devise utilisée par i).
 
     Args:
         i(integer): Le noeud considéré
-        G(Graph):Le graphe représentant les connections des différents agents
+        G(Graph):Le graphe représentant les connexions des différents agents
 
     Returns:
         Ne retourne rien, modifie la devise de i si nécessaire
@@ -153,8 +153,10 @@ print("Les devises dans le système final sont:",L)
 
 def mean_currencies(pinter,pintra):
     '''Cette fonction ajoute à chaque étape le nombre de devises 
-    à l'état final d'un graphe aléatoire avec une probabilité p
-    de connection entre deux noeuds, puis divise par le nombre 
+    à l'état final d'un graphe aléatoire avec une probabilité pinter
+    de connexion entre deux noeuds de la même communauté, et 
+    une probabilité pintra de connexion entre deux noeuds
+    de communautés différentes, puis divise par le nombre 
     de graphes considérés (10000 dans ce cas) afin d'avoir une 
     moyenne.
 
@@ -200,13 +202,6 @@ print("La moyenne pour pinter=0.3 et pintra=0.01 est égale à",mean_currencies(
 print("La moyenne pour pinter=0.3 et pintra=0.05 est égale à",mean_currencies(0.3,0.05))
 print("La moyenne pour pinter=0.3 et pintra=0.2 est égale à",mean_currencies(0.3,0.2))
 
-
-
-
-''' On remarque que pour p>0.1, cette moyenne est égale à 1. 
-Intuitivement, plus les agents sont connectés, plus ils sont
-amenés à avoir une seule devise commune. De façon analogue, lorsque 
-p tend vers 0, la moyenne tend vers 100'''
 
 
 

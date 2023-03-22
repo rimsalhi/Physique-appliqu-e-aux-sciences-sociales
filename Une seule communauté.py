@@ -47,19 +47,19 @@ plt.show()
 
 
 
-#Fonction changement de devise lorsque les connections de i utilisent majoritairement une autre devise 
+#Fonction changement de devise lorsque les connexions de i utilisent majoritairement une autre devise 
 
 
 def change_currency(i,G):
     '''Cette fonction modifie la devise de i en la devise la plus
-    utilisée par ses connections.
+    utilisée par ses connexions.
     Si plusieurs devises sont utilisées par le même nombre maximal 
     de voisins, on choisit aléatoirement l'une de ces devises 
     (en donnant la priorité à la devise utilisée par i).
 
     Args:
         i(integer): Le noeud considéré
-        G(Graph):Le graphe représentant les connections des différents agents
+        G(Graph):Le graphe représentant les connexions des différents agents
 
     Returns:
         Ne retourne rien, modifie la devise de i si nécessaire
@@ -196,12 +196,12 @@ print("Les devises dans le système final sont:",L)
 def mean_currencies(p):
     '''Cette fonction ajoute à chaque étape le nombre de devises 
     à l'état final d'un graphe aléatoire avec une probabilité p
-    de connection entre deux noeuds, puis divise par le nombre 
+    de connexion entre deux noeuds, puis divise par le nombre 
     de graphes considérés (10000 dans ce cas) afin d'avoir une 
     moyenne.
 
     Args:
-        p(float): Probabilité de connection entre deux noeuds
+        p(float): Probabilité de connexion entre deux noeuds
     
     Returns:
         La moyenne des nombres de devises à l'état final
@@ -257,6 +257,7 @@ for p in P:
 
 plt.plot(P,M)
 plt.show() #Complexité élevée, prend trop de tps à être executé
+
 '''Plus p tend vers 0, plus la moyenne tend vers 100.
 Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''
 
