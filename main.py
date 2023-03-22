@@ -103,6 +103,7 @@ def social_utility(G):
 
 
 
+
 #La fonction qui retourne le nombre de devises dans le système final
 
 def currencies_number(G):
@@ -206,6 +207,35 @@ print("La moyenne pour p=0.1 est égale à",mean_currencies(0.8))
 Intuitivement, plus les agents sont connectés, plus ils sont
 amenés à avoir une seule devise commune. De façon analogue, lorsque 
 p tend vers 0, la moyenne tend vers 100'''
+
+
+#Tracé de l'évolution de l'utilité sociale
+
+p=0.1
+C=nx.Graph() 
+C.add_nodes_from(range(1,N+1)) 
+
+for i in range(1,N+1):
+    C.nodes[i]['currency']=str(i)
+
+for i in range(1,N+1):
+    for j in range(i+1,N+1):
+        if random.random()<p:
+            C.add_edge(i, j)
+
+U=[]
+u=social_utility(C)
+precedent=None
+while u!=precedent:
+    precedent=u
+    U.append(u)
+    for i in C.nodes():
+        change_currency(i,C)
+    u=social_utility(B)
+X=[i for i in range(len(U))]
+print(U)
+plt.plot(X,U)
+plt.show()
 
 
 #On trace les résultats pour plusieurs valeurs de p 
