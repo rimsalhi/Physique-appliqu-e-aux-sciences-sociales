@@ -4,6 +4,9 @@ import networkx as nx
 import numpy as np
 from collections import Counter
 
+''' Cette méthode choisit les agents dans l'ordre et ne permet pas
+de changer leurs devises simultanément ''' 
+
 
 N=100 #Nombre d'agents
 
