@@ -2,7 +2,7 @@ import random
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
-from collections import Counter, defaultdict
+from collections import Counter
 
 
 N=100 #Nombre d'agents
@@ -69,7 +69,7 @@ def change_currency(i,G):
         currency_max=max(d,key=d.get)
         if G.nodes[i]['currency']!=currency_max:
             count_max=max(d.values())
-            currencies_max=[j for j,s in d.items() if v==count_max]
+            currencies_max=[j for j,s in d.items() if s==count_max]
             if G.nodes[i]['currency'] in currencies_max:
                 currency=G.nodes[i]['currency']
             else:
@@ -151,11 +151,7 @@ print("B:",B)
 print("L'utilité sociale de B est",social_utility(B))
 print("Le nombre de devises dans B est",currencies_number(B))
 
-L=[]
-for i in B.nodes:
-    if B.nodes[i]['currency'] not in L:
-        L.append(B.nodes[i]['currency'])
-    
+L=set(B.nodes[i]['currency'] for i in B.nodes())
 
 print("Les devises dans le système final sont:",L)
 
