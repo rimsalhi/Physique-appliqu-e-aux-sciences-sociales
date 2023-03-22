@@ -102,6 +102,34 @@ def social_utility(G):
     return u
 
 
+#Tracé de l'évolution de l'utilité sociale 
+
+p=0.8
+C=nx.Graph() 
+C.add_nodes_from(range(1,N+1)) 
+
+for i in range(1,N+1):
+    C.nodes[i]['currency']=str(i)
+
+for i in range(1,N+1):
+    for j in range(i+1,N+1):
+        if random.random()<p:
+            C.add_edge(i, j)
+
+U=[social_utility(C)]
+u=social_utility(C)
+precedent=None
+while u!=precedent:
+    precedent=u
+    for i in C.nodes():
+        change_currency(i,C)
+        u=social_utility(C)
+        U.append(u)
+X=[i for i in range(len(U))]
+print(U)
+plt.plot(X,U)
+plt.show()
+
 
 
 #La fonction qui retourne le nombre de devises dans le système final
@@ -209,33 +237,12 @@ amenés à avoir une seule devise commune. De façon analogue, lorsque
 p tend vers 0, la moyenne tend vers 100'''
 
 
-#Tracé de l'évolution de l'utilité sociale
+#Tracé de l'évolution de l'utilité sociale 
 
-p=0.1
-C=nx.Graph() 
-C.add_nodes_from(range(1,N+1)) 
-
-for i in range(1,N+1):
-    C.nodes[i]['currency']=str(i)
-
-for i in range(1,N+1):
-    for j in range(i+1,N+1):
-        if random.random()<p:
-            C.add_edge(i, j)
-
-U=[]
-u=social_utility(C)
-precedent=None
-while u!=precedent:
-    precedent=u
-    U.append(u)
-    for i in C.nodes():
-        change_currency(i,C)
-    u=social_utility(B)
-X=[i for i in range(len(U))]
+p
 print(U)
 plt.plot(X,U)
-plt.show()
+plt.show(
 
 
 #On trace les résultats pour plusieurs valeurs de p 
