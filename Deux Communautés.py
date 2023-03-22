@@ -147,3 +147,83 @@ L=set(B.nodes[i]['currency'] for i in B.nodes())
 print("Les devises dans le système final sont:",L)
 
 
+
+#La fonction qui retourne la moyenne sur 10000 systèmes des nombres de devises à l'état final
+
+
+def mean_currencies(pinter,pintra):
+    '''Cette fonction ajoute à chaque étape le nombre de devises 
+    à l'état final d'un graphe aléatoire avec une probabilité p
+    de connection entre deux noeuds, puis divise par le nombre 
+    de graphes considérés (10000 dans ce cas) afin d'avoir une 
+    moyenne.
+
+    Args:
+        p(float): Probabilité de connection entre deux noeuds
+    
+    Returns:
+        La moyenne des nombres de devises à l'état final
+    '''
+
+    s=0
+    for i in range(10000):
+
+        G=nx.Graph() 
+
+        G.add_nodes_from(range(1,N+1)) 
+
+        for i in range(1,N+1):
+            G.nodes[i]['currency']=str(i)
+
+          
+
+        for i in range(1,(N//2)+1):
+            for j in range(i+1,(N//2)+1):
+                if random.random()<pinter:
+                    B.add_edge(i, j)
+            for j in range((N//2)+1,N+1):
+                if random.random()<pintra:
+                    B.add_edge(i,j)
+        for i in range((N//2)+1,N+1):
+            for j in range(i+1,N+1):
+                if random.random()<pinter:
+                    B.add_edge(i,j)
+
+        s+=currencies_number(G)
+
+    return(s/10000)
+
+
+
+#Tests de cette fonction
+
+print("La moyenne pour pinter=0.1 et pintra=0.02 est égale à",mean_currencies(0.1,0.2))
+print("La moyenne pour pinter=0.3 et pintra=0.1 est égale à",mean_currencies(0.3,0.1))
+print("La moyenne pour pinter=0.2 et pintra=0.2 est égale à",mean_currencies(0.2,0.2))
+
+
+
+
+''' On remarque que pour p>0.1, cette moyenne est égale à 1. 
+Intuitivement, plus les agents sont connectés, plus ils sont
+amenés à avoir une seule devise commune. De façon analogue, lorsque 
+p tend vers 0, la moyenne tend vers 100'''
+
+
+
+
+
+#On trace les résultats pour plusieurs valeurs de p 
+
+P=np.linspace(0,1,100)
+M=[]
+for p in P:
+    M.append(mean_currencies(p))
+
+plt.plot(P,M)
+plt.show() #Complexité élevée, prend trop de tps à être executé
+'''Plus p tend vers 0, plus la moyenne tend vers 100.
+Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''
+
+
+
