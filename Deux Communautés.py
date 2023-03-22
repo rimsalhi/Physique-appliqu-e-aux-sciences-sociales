@@ -176,18 +176,17 @@ def mean_currencies(pinter,pintra):
             G.nodes[i]['currency']=str(i)
 
           
-
         for i in range(1,(N//2)+1):
             for j in range(i+1,(N//2)+1):
                 if random.random()<pinter:
-                    B.add_edge(i, j)
+                    G.add_edge(i, j)
             for j in range((N//2)+1,N+1):
                 if random.random()<pintra:
-                    B.add_edge(i,j)
+                    G.add_edge(i,j)
         for i in range((N//2)+1,N+1):
             for j in range(i+1,N+1):
                 if random.random()<pinter:
-                    B.add_edge(i,j)
+                    G.add_edge(i,j)
 
         s+=currencies_number(G)
 
@@ -197,9 +196,9 @@ def mean_currencies(pinter,pintra):
 
 #Tests de cette fonction
 
-print("La moyenne pour pinter=0.1 et pintra=0.02 est égale à",mean_currencies(0.1,0.2))
-print("La moyenne pour pinter=0.3 et pintra=0.1 est égale à",mean_currencies(0.3,0.1))
-print("La moyenne pour pinter=0.2 et pintra=0.2 est égale à",mean_currencies(0.2,0.2))
+print("La moyenne pour pinter=0.3 et pintra=0.01 est égale à",mean_currencies(0.3,0.01))
+print("La moyenne pour pinter=0.3 et pintra=0.05 est égale à",mean_currencies(0.3,0.05))
+print("La moyenne pour pinter=0.3 et pintra=0.2 est égale à",mean_currencies(0.3,0.2))
 
 
 
