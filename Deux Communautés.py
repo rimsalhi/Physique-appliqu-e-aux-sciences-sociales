@@ -221,8 +221,3 @@ for pintra in P:
 
 plt.plot(P,M)
 plt.show() #Complexité élevée, prend trop de tps à être executé
-'''Plus p tend vers 0, plus la moyenne tend vers 100.
-Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''
-
-
-
