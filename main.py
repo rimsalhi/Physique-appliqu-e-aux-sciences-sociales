@@ -162,6 +162,7 @@ def currencies_number(G):
 
 
 
+
 #Test des fonctions définies précédemment
 
 p=0.05
@@ -183,6 +184,8 @@ print("Le nombre de devises dans B est",currencies_number(B))
 L=set(B.nodes[i]['currency'] for i in B.nodes())
 
 print("Les devises dans le système final sont:",L)
+
+
 
 
 #La fonction qui retourne la moyenne sur 10000 systèmes des nombres de devises à l'état final
@@ -222,6 +225,8 @@ def mean_currencies(p):
 
 
 
+
+
 #Tests de cette fonction
 
 print("La moyenne pour p=0.1 est égale à",mean_currencies(0.1))
@@ -237,12 +242,7 @@ amenés à avoir une seule devise commune. De façon analogue, lorsque
 p tend vers 0, la moyenne tend vers 100'''
 
 
-#Tracé de l'évolution de l'utilité sociale 
 
-p
-print(U)
-plt.plot(X,U)
-plt.show(
 
 
 #On trace les résultats pour plusieurs valeurs de p 
