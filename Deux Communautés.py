@@ -212,12 +212,12 @@ p tend vers 0, la moyenne tend vers 100'''
 
 
 
-#On trace les résultats pour plusieurs valeurs de p 
+#On trace les résultats pour plusieurs valeurs de pintra et pour pinter=0.3
 
-P=np.linspace(0,1,100)
+P=np.linspace(0,0.3,10)
 M=[]
-for p in P:
-    M.append(mean_currencies(p))
+for pintra in P:
+    M.append(mean_currencies(0.3,pintra))
 
 plt.plot(P,M)
 plt.show() #Complexité élevée, prend trop de tps à être executé
