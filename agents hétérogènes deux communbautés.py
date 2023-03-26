@@ -63,10 +63,11 @@ def change_currency(i,G):
 
 #La fonction qui retourne l'utilité sociale à partir d'un graphe
 
-def social_utility(G):
-    '''Cette fonction soustrait une unité pour chaque couple de 
-    noeud ne possédant pas la même devise. le but est donc de 
-    maxisimer cette fonction afin d'optimiser les échanges.
+def social_utility_hetero(G):
+    '''Cette fonction calcule l'utilité sociale dans le cas d'agents hétérogènes.
+    On suppose que chaque agent j a une ponderation  pj égale à son degré (nombre  de voisins).
+    Ainsi lorsque i veut échanger avec j, il doit payer pi si les monnaies de i et de j sont différentes.
+    Le but est donc de maxisimer cette fonction afin d'optimiser les échanges.
     À chaque changement de devise d'un des agents, cette fonction 
     retourne un entier relatif strictement supérieur au précédent.
     C'est pourquoi il faut s'arrêter lorsque l'entier retourné 
@@ -78,10 +79,11 @@ def social_utility(G):
     '''
 
     u=0
-    for node1,node2 in G.edges():
-        deg=len(list(G.neighbors(node1))) #impact des agents hétérogènes
-        if G.nodes[node1]['currency']!=G.nodes[node2]['currency']:
-            u=u-1
+    for node1 in G.nodes():
+        for node2 in G.nodes():
+            deg=len(list(G.neighbors(node1))) #impact des agents hétérogènes
+            if G.nodes[node1]['currency']!=G.nodes[node2]['currency']:
+                u=u-deg
     return u
 
 
@@ -102,13 +104,13 @@ def currencies_number(G):
         Le nombre de devises dans le graphe
     '''
 
-    u=social_utility(G)
+    u=social_utility_hetero(G)
     precedent=None
     while u!=precedent:
         precedent=u
         for i in G.nodes():
             change_currency(i,G)
-        u=social_utility(G)
+        u=social_utility_hetero(G)
     L=[]
     for i in G.nodes:
         if G.nodes[i]['currency'] not in L:
@@ -140,7 +142,7 @@ for i in range((N//2)+1,N+1):
             B.add_edge(i,j)
 
 print("B:",B)
-print("L'utilité sociale de B est",social_utility(B))
+print("L'utilité sociale de B est",social_utility_hetero(B))
 print("Le nombre de devises dans B est",currencies_number(B))
 
 L=set(B.nodes[i]['currency'] for i in B.nodes())
@@ -210,11 +212,67 @@ print("La moyenne pour pinter=0.3 et pintra=0.2 est égale à",mean_currencies(0
 
 #On trace les résultats pour plusieurs valeurs de pintra et pour pinter=0.3
 
+P=np.linspace(0,0.3,n)
+n=10
+M=[]
+for pintra in P:
+    M.append(mean_currencies(0.3,pintra, n))
+
+plt.plot(P,M)
+plt.xlabel("pintra, probabilité d'échanger avec les voisins de sa communauté")
+plt.ylabel("Nombre de devises à l'équilibre")
+plt.title("Moyenne du nombre de devises à l équilibre selon différentes valeurs de pintra pour pinter=0.3 avec des agents hétérogènes")
+plt.show() #Complexité élevée, prend trop de tps à être executé
+
+######Deuxième cas: chaque communauté a sa propre devise######
+
+
+'''On reprend les fonctions précédentes, et on modifie 
+seulement la manière de construire le graphe, de telle 
+sorte à ce qu'il y ait deux communautés ayant chacune au départ une monnaie unique. 
+Il y a donc à l'état initial 2 monnaies dans le graphe.'''
+
+
+
+pinter=0.3
+pintra=0.05
+B2=nx.Graph() 
+B2.add_nodes_from(range(1,N+1)) 
+
+for i in range(1,(N//2)+1):
+    B2.nodes[i]['currency']=1
+for i in range((N//2)+1,N+1):
+    B2.nodes[i]['currency']=2
+
+for i in range(1,(N//2)+1):
+    for j in range(i+1,(N//2)+1):
+        if random.random()<pinter:
+            B2.add_edge(i, j)
+    for j in range((N//2)+1,N+1):
+        if random.random()<pintra:
+            B2.add_edge(i,j)
+for i in range((N//2)+1,N+1):
+    for j in range(i+1,N+1):
+        if random.random()<pinter:
+            B2.add_edge(i,j)
+
+print("B2:",B2)
+print("L'utilité sociale de B2 est",social_utility(B))
+print("Le nombre de devises dans B2 est",currencies_number(B))
+
+L2=set(B2.nodes[i]['currency'] for i in B2.nodes())
+
+print("Les devises dans le système final lorsque les communautés ont chacune une devise unique à l'état intial sont:",L2)
+#On trace les résultats pour plusieurs valeurs de pintra et pour pinter=0.3
+
 P=np.linspace(0,0.3,10)
 n=10
 M=[]
 for pintra in P:
-    M.append(mean_currencies(0.3,pintra, 10))
+    M.append(mean_currencies(0.3,pintra, n))
 
 plt.plot(P,M)
-plt.show() #Complexité élevée, prend trop de tps à être executé
+plt.xlabel("pintra, probabilité d'échanger avec les voisins de sa communauté")
+plt.ylabel("Nombre de devises à l'équilibre")
+plt.title("Agents hétérogènes : Moyenne du nombre de devises à l équilibre selon différentes valeurs de pintra pour pinter=0.3, lorsqu'il n'y a que deux devises au départ")
+plt.show() #attention à la valeur de n, si n trop grand, le programme est long à s'exécuter

@@ -163,6 +163,7 @@ def currencies_number(G):
         for i in G.nodes():
             change_currency(i,G)
         u=social_utility(G)
+#une fois l'état d'équilibre trouvé, on compte les devises différentes
     L=[]
     for i in G.nodes:
         if G.nodes[i]['currency'] not in L:
@@ -271,7 +272,7 @@ plt.plot(P,M)
 plt.xlabel("p, probabilité d'échanger avec ses voisins")
 plt.ylabel("Nombre de devises à l'équilibre")
 plt.title("Moyenne du nombre de devises à l équilibre selon différentes valeurs de p")
-plt.show() #Complexité élevée, prend trop de tps à être executé
+plt.show() #attention au nombre n de systèmes considérés, pour n trop grand le programme est long à s'executer 
 
 '''Plus p tend vers 0, plus la moyenne tend vers 100.
 Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''

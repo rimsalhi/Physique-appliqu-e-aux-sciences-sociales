@@ -148,7 +148,7 @@ print("Les devises dans le système final sont:",L)
 
 
 
-#La fonction qui retourne la moyenne sur 10000 systèmes des nombres de devises à l'état final
+#La fonction qui retourne la moyenne sur n systèmes des nombres de devises à l'état final
 
 
 def mean_currencies(pinter,pintra, n):
@@ -198,9 +198,12 @@ def mean_currencies(pinter,pintra, n):
 
 #Tests de cette fonction
 
-print("La moyenne pour pinter=0.3 et pintra=0.01 est égale à",mean_currencies(0.3,0.01,10))
-print("La moyenne pour pinter=0.3 et pintra=0.05 est égale à",mean_currencies(0.3,0.05, 10))
-print("La moyenne pour pinter=0.3 et pintra=0.2 est égale à",mean_currencies(0.3,0.2, 10))
+print("La moyenne pour pinter=0.3 et pintra=0.01 sur 10 systèmes est égale à",mean_currencies(0.3,0.01,10))
+print("La moyenne pour pinter=0.3 et pintra=0.01 sur 100 systèmes est égale à",mean_currencies(0.3,0.01,100))
+print("La moyenne pour pinter=0.3 et pintra=0.05 sur 10 systèmes est égale à",mean_currencies(0.3,0.05, 10))
+print("La moyenne pour pinter=0.3 et pintra=0.05 sur 100 systèmes est égale à",mean_currencies(0.3,0.05, 100))
+print("La moyenne pour pinter=0.3 et pintra=0.2 sur 10 systèmes est égale à",mean_currencies(0.3,0.2, 10))
+print("La moyenne pour pinter=0.3 et pintra=0.2 sur 100 systèmes est égale à",mean_currencies(0.3,0.2, 100))
 
 
 
@@ -213,7 +216,64 @@ P=np.linspace(0,0.3,10)
 n=10
 M=[]
 for pintra in P:
-    M.append(mean_currencies(0.3,pintra, 10))
+    M.append(mean_currencies(0.3,pintra, n))
 
 plt.plot(P,M)
-plt.show() #Complexité élevée, prend trop de tps à être executé
+plt.xlabel("pintra, probabilité d'échanger avec les voisins de sa communauté")
+plt.ylabel("Nombre de devises à l'équilibre")
+plt.title("Moyenne du nombre de devises à l équilibre selon différentes valeurs de pintra pour pinter=0.3")
+plt.show() #attention à la valeur de n, si n trop grand, le programme est long à s'exécuter
+
+
+######Deuxième cas: chaque communauté a sa propre devise######
+
+
+'''On reprend les fonctions précédentes, et on modifie 
+seulement la manière de construire le graphe, de telle 
+sorte à ce qu'il y ait deux communautés ayant chacune au départ une monnaie unique. 
+Il y a donc à l'état initial 2 monnaies dans le graphe.'''
+
+
+
+pinter=0.3
+pintra=0.05
+B2=nx.Graph() 
+B2.add_nodes_from(range(1,N+1)) 
+
+for i in range(1,(N//2)+1):
+    B2.nodes[i]['currency']=1
+for i in range((N//2)+1,N+1):
+    B2.nodes[i]['currency']=2
+
+for i in range(1,(N//2)+1):
+    for j in range(i+1,(N//2)+1):
+        if random.random()<pinter:
+            B2.add_edge(i, j)
+    for j in range((N//2)+1,N+1):
+        if random.random()<pintra:
+            B2.add_edge(i,j)
+for i in range((N//2)+1,N+1):
+    for j in range(i+1,N+1):
+        if random.random()<pinter:
+            B2.add_edge(i,j)
+
+print("B2:",B2)
+print("L'utilité sociale de B2 est",social_utility(B))
+print("Le nombre de devises dans B2 est",currencies_number(B))
+
+L2=set(B2.nodes[i]['currency'] for i in B2.nodes())
+
+print("Les devises dans le système final lorsque les communautés ont chacune une devise unique à l'état intial sont:",L2)
+#On trace les résultats pour plusieurs valeurs de pintra et pour pinter=0.3
+
+P=np.linspace(0,0.3,10)
+n=10
+M=[]
+for pintra in P:
+    M.append(mean_currencies(0.3,pintra, n))
+
+plt.plot(P,M)
+plt.xlabel("pintra, probabilité d'échanger avec les voisins de sa communauté")
+plt.ylabel("Nombre de devises à l'équilibre")
+plt.title("Moyenne du nombre de devises à l équilibre selon différentes valeurs de pintra pour pinter=0.3, lorsqu'il n'y a que deux devises au départ")
+plt.show() #attention à la valeur de n, si n trop grand, le programme est long à s'exécuter

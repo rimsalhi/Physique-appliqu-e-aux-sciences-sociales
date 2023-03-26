@@ -84,10 +84,11 @@ def change_currency(i,G):
 
 #La fonction qui retourne l'utilité sociale à partir d'un graphe
 
-def social_utility(G):
-    '''Cette fonction soustrait une unité pour chaque couple de 
-    noeud ne possédant pas la même devise. le but est donc de 
-    maxisimer cette fonction afin d'optimiser les échanges.
+def social_utility_hetero(G):
+    '''Cette fonction calcule l'utilité sociale dans le cas d'agents hétérogènes.
+    On suppose que chaque agent j a une ponderation  pj égale à son degré (nombre  de voisins).
+    Ainsi lorsque i veut échanger avec j, il doit payer pi si les monnaies de i et de j sont différentes.
+    Le but est donc de maxisimer cette fonction afin d'optimiser les échanges.
     À chaque changement de devise d'un des agents, cette fonction 
     retourne un entier relatif strictement supérieur au précédent.
     C'est pourquoi il faut s'arrêter lorsque l'entier retourné 
@@ -99,10 +100,11 @@ def social_utility(G):
     '''
 
     u=0
-    for node1,node2 in G.edges():
-        deg=len(list(G.neighbors(node1))) #impact des agents hétérogènes
-        if G.nodes[node1]['currency']!=G.nodes[node2]['currency']:
-            u=u-deg
+    for node1 in G.nodes():
+        for node2 in G.nodes():
+            deg=len(list(G.neighbors(node1))) #impact des agents hétérogènes
+            if G.nodes[node1]['currency']!=G.nodes[node2]['currency']:
+                u=u-deg
     return u
 
 
@@ -123,21 +125,21 @@ for i in range(1,N+1):
             C.add_edge(i, j)
 
 #calcul de l'utilité sociale
-U=[social_utility(C)]
-u=social_utility(C)
+U=[social_utility_hetero(C)]
+u=social_utility_hetero(C)
 precedent=None
 while u!=precedent:
     precedent=u
     for i in C.nodes():
         change_currency(i,C)
-        u=social_utility(C)
+        u=social_utility_hetero(C)
         U.append(u)
 X=[i for i in range(len(U))]
 print(U)
 plt.plot(X,U)
 plt.xlabel("temps")
 plt.ylabel("Utilité sociale")
-plt.title("Evolution de l'utilité sociale dans le temps")
+plt.title("Evolution de l'utilité sociale dans le temps avec des agents hétérogènes")
 plt.show()
 
 
@@ -157,13 +159,13 @@ def currencies_number(G):
         Le nombre de devises dans le graphe
     '''
 #on cherche un équilibre pour compter le nombre de dévises à l'équilibre
-    u=social_utility(G)
+    u=social_utility_hetero(G)
     precedent=None
     while u!=precedent:
         precedent=u
         for i in G.nodes():
             change_currency(i,G)
-        u=social_utility(G)
+        u=social_utility_hetero(G)
     L=[]
     for i in G.nodes:
         if G.nodes[i]['currency'] not in L:
@@ -188,7 +190,7 @@ for i in range(1,N+1):
             B.add_edge(i, j)
 
 print("B:",B)
-print("L'utilité sociale de B est",social_utility(B))
+print("L'utilité sociale de B est",social_utility_hetero(B))
 print("Le nombre de devises dans B est",currencies_number(B))
 
 L=set(B.nodes[i]['currency'] for i in B.nodes())
@@ -271,7 +273,7 @@ for p in P:
 plt.plot(P,M)
 plt.xlabel("p, probabilité d'échanger avec ses voisins")
 plt.ylabel("Nombre de devises à l'équilibre")
-plt.title("Moyenne du nombre de devises à l équilibre selon différentes valeurs de p")
+plt.title("Moyenne du nombre de devises à l équilibre selon différentes valeurs de p avec des agents hétérogènes")
 plt.show() #Complexité élevée, prend trop de tps à être executé
 
 '''Plus p tend vers 0, plus la moyenne tend vers 100.
