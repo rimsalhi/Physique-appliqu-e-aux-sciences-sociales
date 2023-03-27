@@ -282,5 +282,6 @@ plt.show() #Complexité élevée, prend trop de tps à être executé
 '''Plus p tend vers 0, plus la moyenne tend vers 100.
 Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''
 
+
 '''Conclusion : On obtient les mêmes conclusions que lorsque les agents n'étaient pas hétérogènes. 
 L'hétérogénéité n'a un impact que sur le choix de la ou des monnaies dominantes. Mais pas sur le nombre de devise à l'équilibre.'''

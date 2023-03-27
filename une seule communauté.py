@@ -8,6 +8,12 @@ from collections import Counter
 de changer leurs devises simultanément ''' 
 
 
+"""_summary_
+
+    Returns:
+        _type_: _description_
+
+"""
 N=100 #Nombre d'agents
 
 
