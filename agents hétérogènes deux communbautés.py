@@ -88,7 +88,6 @@ def social_utility_hetero(G):
 
 
 
-
 #La fonction qui retourne le nombre de devises dans le système final
 
 def currencies_number(G):
