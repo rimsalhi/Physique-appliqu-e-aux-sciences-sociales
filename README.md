@@ -13,10 +13,14 @@
 #Contenu du code : Simulations issues de l'article choisi. Nous avons codé les simulations expliquées dans l'article afin de vérifier si nous trouvions des résultats cohérents avec l'article.
 
 #Le code est séparé en 2 partie :
+
 #Premièrement, nous observons l'évolution du choix de monnaie dans le cas d'une communauté (sous 2 hyptohèses différentes, agents non-hétérogènes et agents hétérogènes)
 #Ensuite nous observons l'évolution du choix de monnaie commune dans le cas de deux communautés (sous 2 hyptohèses différentes, agents non-hétérogènes et agents hétérogènes)
+
 #Et dans ce cas là nous étudions deux situations initiales différentes :
+
 #- chaque agent a une monnaie différente
+
 #- les agents partagent à l'état initial une monnaie unique au sein de leur communauté
 
 #Nous observons des résultats similaires à ceux trouvés dans l'article.
