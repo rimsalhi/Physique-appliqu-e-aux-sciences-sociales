@@ -16,7 +16,7 @@
 #Premièrement, nous observons l'évolution du choix de monnaie dans le cas d'une communauté (sous 2 hyptohèses différentes, agents non-hétérogènes et agents hétérogènes)
 #Ensuite nous observons l'évolution du choix de monnaie commune dans le cas de deux communautés (sous 2 hyptohèses différentes, agents non-hétérogènes et agents hétérogènes)
 #Et dans ce cas là nous étudions deux situations initiales différentes :
-#     - chaque agent a une monnaie différente
-#     - les agents partagent à l'état initial une monnaie unique au sein de leur communauté
+#- chaque agent a une monnaie différente
+#- les agents partagent à l'état initial une monnaie unique au sein de leur communauté
 
 #Nous observons des résultats similaires à ceux trouvés dans l'article.
