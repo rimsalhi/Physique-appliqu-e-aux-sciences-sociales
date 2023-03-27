@@ -2,7 +2,7 @@
 #Travail réalisé dans le cadre du projet de Physique appliquée aux sciences sociales à l'ENSAE en 2023
 #Professeur : M. Jean-Pierre Nadal
 #Chargé de TD : M. Guillaume Maitrier
-#membre du groupe : Audreuy Bovet, Lucas Leproult, Rim Salhi
+#membre du groupe : Audrey Bovet, Lucas Leproult, Rim Salhi
 
 #Article sélectionné : Coexistence of several currencies in presence of increasing returns to adoption, Physica A, 2018
 
