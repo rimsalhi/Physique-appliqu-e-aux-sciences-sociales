@@ -105,7 +105,7 @@ def social_utility_hetero(G):
     u=0
     for node1 in G.nodes():
         for node2 in G.nodes():
-            deg=len(list(G.neighbors(node1))) #impact des agents hétérogènes
+            deg=len(list(G.neighbors(node2))) #impact des agents hétérogènes
             if G.nodes[node1]['currency']!=G.nodes[node2]['currency']:
                 u=u-deg
     return u
