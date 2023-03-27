@@ -214,7 +214,7 @@ print("La moyenne pour pintra=0.3 et pinter=0.2 sur 10 systèmes est égale à",
 
 #On trace les résultats pour plusieurs valeurs de pintra et pour pinter=0.3
 
-P=np.linspace(0,0.3,n)
+P=np.linspace(0,0.3,10)
 n=10
 M=[]
 for pinter in P:
@@ -259,7 +259,7 @@ for i in range((N//2)+1,N+1):
             B2.add_edge(i,j)
 
 print("B2:",B2)
-print("L'utilité sociale de B2 est",social_utility(B))
+print("L'utilité sociale de B2 est",social_utility_hetero(B))
 print("Le nombre de devises dans B2 est",currencies_number(B))
 
 L2=set(B2.nodes[i]['currency'] for i in B2.nodes())
