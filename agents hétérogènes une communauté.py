@@ -4,6 +4,9 @@ import networkx as nx
 import numpy as np
 from collections import Counter
 
+'''On reprend les mêmes simulations que précédemment mais en ajoutant l'impact d'agents hétérogènes'''
+
+
 ''' Cette méthode choisit les agents dans l'ordre et ne permet pas
 de changer leurs devises simultanément ''' 
 
@@ -280,4 +283,5 @@ plt.show() #Complexité élevée, prend trop de tps à être executé
 Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''
 
 
-
+'''Conclusion : On obtient les mêmes conclusions que lorsque les agents n'étaient pas hétérogènes. 
+L'hétérogénéité n'a un impact que sur le choix de la ou des monnaies dominantes. Mais pas sur le nombre de devise à l'équilibre.'''
