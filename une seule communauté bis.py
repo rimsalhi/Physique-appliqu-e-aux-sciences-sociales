@@ -240,14 +240,13 @@ def mean_currencies(p,n):
 
 #Tests de cette fonction
 
-'''
 print("La moyenne pour p=0.1 sur 10 systèmes est égale à",mean_currencies(0.1, 10))
 print("La moyenne pour p=0.1 sur 1000 systèmes est égale à",mean_currencies(0.1, 1000))
 print("La moyenne pour p=0.05 sur 100 systèmes est égale à",mean_currencies(0.05, 100))
 print("La moyenne pour p=0.05 sur 1000 systèmes est égale à",mean_currencies(0.05, 1000))
 print("La moyenne pour p=0.8 sur 100 systèmes est égale à",mean_currencies(0.8, 100))
 print("La moyenne pour p=0.8 sur 1000 systèmes est égale à",mean_currencies(0.8, 1000))
-print("La moyenne pour p=0.001 sur 1000 systèmes est égale à",mean_currencies(0.1, 1000))'''
+print("La moyenne pour p=0.001 sur 1000 systèmes est égale à",mean_currencies(0.1, 1000))
 
 
 
@@ -274,6 +273,8 @@ plt.ylabel("Nombre de devises à l'équilibre")
 plt.title("Moyenne du nombre de devises à l équilibre selon différentes valeurs de p")
 plt.show() #attention au nombre n de systèmes considérés, pour n trop grand le programme est long à s'executer 
 
+#note : à l'affichage du graphe, on a l'impression que la valeur atteinte est 0 mais c'est en fait 1 (vérifier à l'aide des print de la fonction mean_currencies)
+#Elle est juste considérée comme négligeable
 '''Plus p tend vers 0, plus la moyenne tend vers 100.
 Inversement, plus p tend vers 1, plus la moyenne tend vers 1'''
 
